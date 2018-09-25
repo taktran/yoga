@@ -5,6 +5,7 @@ import PoseNet from './components/posenet';
 import './style.css';
 import PageIframe from './components/iframe';
 
+
 import { VIDEO_SIZE, POSENET_NODES } from './constants';
 const minScore = 0.5;
 
@@ -56,7 +57,7 @@ class App extends Component {
       return nodesIDs.includes(source) && nodesIDs.includes(target);
     });
   }
-
+ 
   getGraph(poses){
     const nodes = this.getNodesWithPosition(poses);
 
@@ -64,6 +65,7 @@ class App extends Component {
   }
 
   render() {
+    
     const videoSize = VIDEO_SIZE;
 
     return (
@@ -84,6 +86,7 @@ class App extends Component {
       }
       
       </PoseNet>
+      
       <PageIframe />
     </div>
 
