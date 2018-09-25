@@ -102,5 +102,11 @@ class App extends Component {
     );
   }
 }
-render(<App />, document.getElementById('root'));
+
+document.addEventListener('readystatechange', event => {
+  if (event.target.readyState === "complete") {
+    render(<App />, document.getElementById('root'));
+  }
+});
+
 
