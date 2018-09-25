@@ -53,8 +53,8 @@ export default class SVGGraph extends Component {
       .append('g')
 
     node.append('circle')
-      .attr('r', d => d.r * 2)
-      .attr('fill', circleColor);
+      .attr('r', d => d.r)
+      .attr('fill', d => d.color || circleColor);
 
   /*  const link = this.svg.append('g')
       .selectAll('line')
