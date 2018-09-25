@@ -4,6 +4,8 @@ export const COLORS = {
   sky: '#CCE6FF'
 };
 
+export const POSENET_THROTTLE = 5000;
+
 export const VIDEO_SIZE = 600;
 export const POSENET_IDS = {
   LEFT_WRIST: 'leftWrist',

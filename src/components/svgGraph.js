@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { throttle } from 'lodash';
 import * as d3 from 'd3';
-import { POSENET_IDS, COLORS } from '../constants';
+import { POSENET_IDS, COLORS, POSENET_THROTTLE } from '../constants';
 import { ARTICLES } from '../content';
 import createPoseDetection from './create-pose-detection';
 
@@ -23,6 +24,26 @@ export default class SVGGraph extends Component {
       currentChild: 0,
       childrenArticles: ARTICLES.children
     };
+    const updatePage = () => {
+      const { iframe, currentChild, childrenArticles } = this.state;
+      const article = childrenArticles[currentChild];
+      iframe.src = article;
+
+      console.log('Show article', article);
+
+      this.setState(({ currentChild }) => {
+        let newIndex = currentChild + 1;
+        if (newIndex >= childrenArticles.length) {
+          newIndex = 0;
+        }
+
+        console.log('Update currentChild', newIndex);
+        return {
+          currentChild: newIndex
+        };
+      });
+    };
+    this.updatePage = throttle(updatePage, POSENET_THROTTLE);
   };
 
   shouldComponentUpdate = () => false;
@@ -114,23 +135,7 @@ export default class SVGGraph extends Component {
       .on('tick', ticked)
 
     if (hasMountainPose) {
-      const { iframe, currentChild, childrenArticles } = this.state;
-      const article = childrenArticles[currentChild];
-      iframe.src = article;
-
-      console.log('Show article', article);
-
-      this.setState(({ currentChild }) => {
-        let newIndex = currentChild + 1;
-        if (newIndex >= childrenArticles.length) {
-          newIndex = 0;
-        }
-
-        console.log('Update currentChild', newIndex);
-        return {
-          currentChild: newIndex
-        };
-      });
+      this.updatePage();
     }
 
    /* simulation
