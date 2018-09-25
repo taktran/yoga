@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as posenet from '@tensorflow-models/posenet';
+import { VIDEO_SIZE } from '../constants';
 
 const MILLISECONDS = 50;
 const imageScaleFactor = 0.5;
@@ -110,5 +111,5 @@ PoseNet.propTypes = {
 };
 
 PoseNet.defaultProps = {
-  videoSize: 300,
+  videoSize: VIDEO_SIZE,
 };

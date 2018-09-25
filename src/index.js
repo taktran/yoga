@@ -4,6 +4,8 @@ import SVGGraph from './components/svgGraph';
 import PoseNet from './components/posenet';
 import './style.css';
 
+import { VIDEO_SIZE } from './constants';
+
 const minScore = 0.5;
 
 class App extends Component {
@@ -71,7 +73,7 @@ class App extends Component {
   }
 
   render() {
-    const videoSize = 300;
+    const videoSize = VIDEO_SIZE;
 
     return (
       <PoseNet videoSize={videoSize}>
