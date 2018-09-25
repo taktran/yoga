@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 import { POSENET_IDS, COLORS } from '../constants';
+import { ARTICLES } from '../content';
 import createPoseDetection from './create-pose-detection';
 
 const {
@@ -15,6 +16,15 @@ const initialColor = COLORS.sky;
 const successColor = COLORS.oxford;
 
 export default class SVGGraph extends Component {
+  constructor () {
+    super();
+    this.state = {
+      iframe: document.getElementById('iframe'),
+      currentChild: 0,
+      childrenArticles: ARTICLES.children
+    };
+  };
+
   shouldComponentUpdate = () => false;
 
   componentDidMount() {
@@ -102,6 +112,16 @@ export default class SVGGraph extends Component {
     simulation
       .nodes(nodes)
       .on('tick', ticked)
+
+    if (hasMountainPose) {
+      const { iframe, currentChild, childrenArticles } = this.state;
+      iframe.src = childrenArticles[currentChild];
+
+      this.state.currentChild++
+      if (this.state.currentChild >= childrenArticles.length) {
+        this.state.currentChild = 0;
+      }
+    }
 
    /* simulation
       .force('link')
