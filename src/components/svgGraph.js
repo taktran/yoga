@@ -6,7 +6,9 @@ import createPoseDetection from './create-pose-detection';
 
 const {
   LEFT_WRIST,
-  RIGHT_WRIST
+  RIGHT_WRIST,
+  LEFT_ANKLE,
+  RIGHT_ANKLE
 } = POSENET_IDS;
 
 const initialColor = COLORS.sky;
@@ -50,6 +52,7 @@ export default class SVGGraph extends Component {
     } = this.props.graph;
     const poseDetection = createPoseDetection(nodes);
     const hasMountainPose = poseDetection.hasMountainPose();
+    const hasPreparationPose = poseDetection.hasPreparationPose();
     const { width, height } = this.containerSize();
     this.svg = d3.select(this.mySvg)
       .attr('width', width)
@@ -67,7 +70,10 @@ export default class SVGGraph extends Component {
         if ((id === LEFT_WRIST) || (id === RIGHT_WRIST)) {
           return hasMountainPose ? successColor : initialColor;  
         }
-        
+        if ((id === LEFT_ANKLE) || (id === RIGHT_ANKLE)) {
+          return hasPreparationPose ? successColor : initialColor;  
+        }
+
         return initialColor;
       });
 
