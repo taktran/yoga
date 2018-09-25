@@ -7,10 +7,7 @@ export default class PageIframe extends Component {
     <Iframe url="https://ft.com"
     width="100%"
     height="100%"
-    id="myId"
-    className="myClassname"
-    display="initial"
-    position="relative"
+    id="iframe"
     allowFullScreen ="true"
     frameborder="0"
     />) }
