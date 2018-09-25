@@ -1,7 +1,7 @@
 {
   "name": "posenet-d3",
   "description": "",
-  "homepage": "https://stackblitz.com/edit/posenet-d3",
+  "homepage": "https://yoga-ft.netlify.com",
   "dependencies": {
     "@tensorflow-models/posenet": "0.1.2",
     "@tensorflow/tfjs": "0.13.0",
