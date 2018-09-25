@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { render } from 'react-dom';
 import * as posenet from '@tensorflow-models/posenet';
 
 const MILLISECONDS = 50;
@@ -8,7 +7,7 @@ const imageScaleFactor = 0.5;
 const outputStride = 16;
 const flipHorizontal = true;
 const weight = 0.5;
-const initialPosition = 40;
+// const initialPosition = 40;
 
 export default class PoseNet extends Component {
   state = {
@@ -70,7 +69,6 @@ export default class PoseNet extends Component {
   }
 
   capture = async () => {
-    let nose;
     if(!this.videoElement || !this.net){
       this.initCapture();
       return;

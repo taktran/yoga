@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { render } from 'react-dom';
 import * as d3 from 'd3';
 
 export default class SVGGraph extends Component {
@@ -35,7 +34,10 @@ export default class SVGGraph extends Component {
   }
 
   draw() {
-    const { nodes, links } = this.props.graph;
+    const {
+      nodes,
+      // links
+    } = this.props.graph;
     const { width, height } = this.containerSize();
     this.svg = d3.select(this.mySvg)
       .attr('width', width)
@@ -47,7 +49,7 @@ export default class SVGGraph extends Component {
       .enter()
       .append('g')
 
-    const circles = node.append('circle')
+    node.append('circle')
       .attr('r', d => d.r)
       .attr('fill', '#1565c0');
 
