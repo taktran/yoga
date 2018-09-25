@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import SVGGraph from './components/svgGraph';
 import PoseNet from './components/posenet';
 import './style.css';
-
+import PageIframe from './components/iframe';
 const minScore = 0.5;
 
 class App extends Component {
@@ -40,6 +40,11 @@ class App extends Component {
     ]
   }
 
+  componentDidMount(){
+   
+  }
+  
+
   getNodesWithPosition(poses){
     return this.nodes.reduce((arr, node) => {
       const pose = poses[node.id] || {};
@@ -74,21 +79,28 @@ class App extends Component {
     const videoSize = 300;
 
     return (
+  <div>
       <PoseNet videoSize={videoSize}>
       {
         ({ poses, loading }) => (
           loading 
           ? 'Loading...'
           : (
+            <div>
             <SVGGraph 
               graph={this.getGraph(poses)} 
             />
+             
+            </div>
           ))
       }
-      </PoseNet>
       
+      </PoseNet>
+      <PageIframe />
+    </div>
+
     );
   }
 }
-
 render(<App />, document.getElementById('root'));
+
