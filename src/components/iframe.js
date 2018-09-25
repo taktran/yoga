@@ -7,9 +7,9 @@ export default class PageIframe extends Component {
     return (  
     <Iframe url={ARTICLES.parent}
     width="100%"
-    height="100%"
+    height="1000%"
     id="iframe"
-    allowFullScreen ="true"
-    frameborder="0"
+    scrolling="yes"
+    allowFullScreen
     />) }
 }

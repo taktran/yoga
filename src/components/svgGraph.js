@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import { POSENET_IDS, COLORS, POSENET_THROTTLE } from '../constants';
 import { ARTICLES } from '../content';
 import createPoseDetection from './create-pose-detection';
+import $ from "jquery";
 
 const {
   LEFT_WRIST,
@@ -142,13 +143,21 @@ export default class SVGGraph extends Component {
       .force('link')
       .links(links);*/
   }
-
+  test(){
+    let x = 0;
+    setInterval(function(){
+      x+=10;
+    $("html, body").animate({scrollTop: x + 100}, 1000);
+    },300);
+    
+  }
   render() {
     return (
       <div
         className="container"
         ref={ref => { this.container = ref; }}
       >
+      <button id="test" onClick={this.test}>TEst</button>
         <svg ref={ref => { this.mySvg = ref;  }} />
       </div>
     );
