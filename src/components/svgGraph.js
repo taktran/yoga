@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
-import { COLORS } from '../constants';
+import { POSENET_IDS, COLORS } from '../constants';
+import createPoseDetection from './create-pose-detection';
 
-const circleColor = COLORS.claret;
+const {
+  LEFT_WRIST,
+  RIGHT_WRIST
+} = POSENET_IDS;
+
+const initialColor = COLORS.sky;
+const successColor = COLORS.oxford;
 
 export default class SVGGraph extends Component {
   shouldComponentUpdate = () => false;
@@ -41,6 +48,8 @@ export default class SVGGraph extends Component {
       nodes,
       // links
     } = this.props.graph;
+    const poseDetection = createPoseDetection(nodes);
+    const hasMountainPose = poseDetection.hasMountainPose();
     const { width, height } = this.containerSize();
     this.svg = d3.select(this.mySvg)
       .attr('width', width)
@@ -54,7 +63,13 @@ export default class SVGGraph extends Component {
 
     node.append('circle')
       .attr('r', d => d.r)
-      .attr('fill', d => d.color || circleColor);
+      .attr('fill', ({ id }) => {
+        if ((id === LEFT_WRIST) || (id === RIGHT_WRIST)) {
+          return hasMountainPose ? successColor : initialColor;  
+        }
+        
+        return initialColor;
+      });
 
   /*  const link = this.svg.append('g')
       .selectAll('line')

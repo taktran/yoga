@@ -5,6 +5,12 @@ export const COLORS = {
 };
 
 export const VIDEO_SIZE = 600;
+export const POSENET_IDS = {
+  LEFT_WRIST: 'leftWrist',
+  RIGHT_WRIST: 'rightWrist',
+  LEFT_ANKLE: 'leftAnkle',
+  RIGHT_ANKLE: 'rightAnkle'
+};
 
 export const POSENET_NODES = [
   {
@@ -17,13 +23,13 @@ export const POSENET_NODES = [
   // { id: 'leftElbow', r: 5 },
   // { id: 'rightElbow', r: 5 },
   {
-    id: 'leftWrist',
+    id: POSENET_IDS.LEFT_WRIST,
     r: 25,
     color: COLORS.claret,
     label: 'left'
   },
   {
-    id: 'rightWrist',
+    id: POSENET_IDS.RIGHT_WRIST,
     r: 25,
     color: COLORS.claret,
     label: 'right'
@@ -33,13 +39,13 @@ export const POSENET_NODES = [
   // { id: 'leftKnee', r: 5 },
   // { id: 'rightKnee', r: 5 },
   {
-    id: 'leftAnkle',
+    id: POSENET_IDS.LEFT_ANKLE,
     r: 25,
     color: COLORS.sky,
     label: 'left'
   },
   {
-    id: 'rightAnkle',
+    id: POSENET_IDS.RIGHT_ANKLE,
     r: 25,
     color: COLORS.sky,
     label: 'right'
