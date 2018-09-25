@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 
+const COLORS = {
+  claret: '#990F3D',
+  sky: '#CCE6FF'
+};
+
+const circleColor = COLORS.claret;
+
 export default class SVGGraph extends Component {
   shouldComponentUpdate = () => false;
 
@@ -50,15 +57,15 @@ export default class SVGGraph extends Component {
       .append('g')
 
     node.append('circle')
-      .attr('r', d => d.r)
-      .attr('fill', '#1565c0');
+      .attr('r', d => d.r * 2)
+      .attr('fill', circleColor);
 
   /*  const link = this.svg.append('g')
       .selectAll('line')
       .data(links)
       .enter()
       .append('line')
-      .attr('stroke', '#1565c0')
+      .attr('stroke', circleColor)
       .attr('stroke-width', 5)*/
 
    const simulation = d3.forceSimulation()
