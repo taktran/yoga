@@ -4,26 +4,14 @@ import SVGGraph from './components/svgGraph';
 import PoseNet from './components/posenet';
 import './style.css';
 import PageIframe from './components/iframe';
+
+import { VIDEO_SIZE, POSENET_NODES } from './constants';
 const minScore = 0.5;
 
 class App extends Component {
   constructor() {
     super();
-    this.nodes = [
-      { id: 'nose', r: 25 },
-      { id: 'leftShoulder', r: 5 },
-      { id: 'rightShoulder', r: 5 },
-      { id: 'leftElbow', r: 5 },
-      { id: 'rightElbow', r: 5 },
-      { id: 'leftWrist', r: 10 },
-      { id: 'rightWrist', r: 10 },
-      { id: 'leftHip', r: 5 },
-      { id: 'rightHip', r: 5 },
-      { id: 'leftKnee', r: 5 },
-      { id: 'rightKnee', r: 5 },
-      { id: 'leftAnkle', r: 10 },
-      { id: 'rightAnkle', r: 10 },
-    ];
+    this.nodes = POSENET_NODES;
     this.links = [
       { source: 'leftShoulder', target: 'rightShoulder' },
       { source: 'rightWrist', target: 'rightElbow' },
@@ -76,7 +64,7 @@ class App extends Component {
   }
 
   render() {
-    const videoSize = 300;
+    const videoSize = VIDEO_SIZE;
 
     return (
   <div>
