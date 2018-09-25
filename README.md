@@ -1,6 +1,6 @@
-# Posenet with D3
+# Yoga
 
-TensorFlow.js, posenet, d3, react.
+Using yoga poses to control the internet.
 
-This project is using the posenet model to predict from the camara the human poses and generate with D3 nodes with the same position of theses poses.
+Based off the [aralroca/posenet-d3](https://github.com/aralroca/posenet-d3/) demo.
 
