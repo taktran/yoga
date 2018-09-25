@@ -115,12 +115,22 @@ export default class SVGGraph extends Component {
 
     if (hasMountainPose) {
       const { iframe, currentChild, childrenArticles } = this.state;
-      iframe.src = childrenArticles[currentChild];
+      const article = childrenArticles[currentChild];
+      iframe.src = article;
 
-      this.state.currentChild++
-      if (this.state.currentChild >= childrenArticles.length) {
-        this.state.currentChild = 0;
-      }
+      console.log('Show article', article);
+
+      this.setState(({ currentChild }) => {
+        let newIndex = currentChild + 1;
+        if (newIndex >= childrenArticles.length) {
+          newIndex = 0;
+        }
+
+        console.log('Update currentChild', newIndex);
+        return {
+          currentChild: newIndex
+        };
+      });
     }
 
    /* simulation
