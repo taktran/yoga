@@ -6,7 +6,10 @@
     "@tensorflow-models/posenet": "0.1.2",
     "@tensorflow/tfjs": "0.13.0",
     "d3": "5.4.0",
+<<<<<<< HEAD
     "lodash": "^4.17.11",
+=======
+>>>>>>> iframe
     "jquery": "^3.3.1",
     "prop-types": "15.6.1",
     "react": "16.1.1",
