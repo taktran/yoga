@@ -18,12 +18,14 @@ const initialColor = COLORS.sky;
 const successColor = COLORS.oxford;
 
 export default class SVGGraph extends Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       iframe: document.getElementById('iframe'),
       currentChild: 0,
-      childrenArticles: ARTICLES.children
+      childrenArticles: ARTICLES.children,
+
+
     };
     const updatePage = () => {
       const { iframe, currentChild, childrenArticles } = this.state;
@@ -45,6 +47,17 @@ export default class SVGGraph extends Component {
       });
     };
     this.updatePage = throttle(updatePage, POSENET_THROTTLE);
+    const pageScroll = () => {
+      let x = 0;
+      clearInterval(this.state.scrollInterval);
+      const scrollInterval = setInterval(function () {
+        x += 30;
+        $("html, body").animate({ scrollTop: x + 100 }, 1000);
+      }, 300);
+      this.setState({scrollInterval});
+    };
+    this.pageScroll = throttle(pageScroll, POSENET_THROTTLE);
+
   };
 
   shouldComponentUpdate = () => false;
@@ -100,25 +113,25 @@ export default class SVGGraph extends Component {
       .attr('r', d => d.r)
       .attr('fill', ({ id }) => {
         if ((id === LEFT_WRIST) || (id === RIGHT_WRIST)) {
-          return hasMountainPose ? successColor : initialColor;  
+          return hasMountainPose ? successColor : initialColor;
         }
         if ((id === LEFT_ANKLE) || (id === RIGHT_ANKLE)) {
-          return hasPreparationPose ? successColor : initialColor;  
+          return hasPreparationPose ? successColor : initialColor;
         }
 
         return initialColor;
       });
 
-  /*  const link = this.svg.append('g')
-      .selectAll('line')
-      .data(links)
-      .enter()
-      .append('line')
-      .attr('stroke', circleColor)
-      .attr('stroke-width', 5)*/
+    /*  const link = this.svg.append('g')
+        .selectAll('line')
+        .data(links)
+        .enter()
+        .append('line')
+        .attr('stroke', circleColor)
+        .attr('stroke-width', 5)*/
 
-   const simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().id(d => d.id))  
+    const simulation = d3.forceSimulation()
+      .force('link', d3.forceLink().id(d => d.id))
       .force('center', d3.forceCenter(width / 2, height / 2));
 
     const ticked = () => {
@@ -129,7 +142,7 @@ export default class SVGGraph extends Component {
         .attr('y2', d => d.target.y);*/
       node
         .attr('transform', d => `translate(${d.x}, ${d.y})`);
-      }
+    }
 
     simulation
       .nodes(nodes)
@@ -138,27 +151,22 @@ export default class SVGGraph extends Component {
     if (hasMountainPose) {
       this.updatePage();
     }
+    if (hasPreparationPose) {
+      this.pageScroll();
+    }
+    /* simulation
+       .force('link')
+       .links(links);*/
+  }
 
-   /* simulation
-      .force('link')
-      .links(links);*/
-  }
-  test(){
-    let x = 0;
-    setInterval(function(){
-      x+=10;
-    $("html, body").animate({scrollTop: x + 100}, 1000);
-    },300);
-    
-  }
   render() {
     return (
       <div
         className="container"
         ref={ref => { this.container = ref; }}
       >
-      <button id="test" onClick={this.test}>TEst</button>
-        <svg ref={ref => { this.mySvg = ref;  }} />
+
+        <svg ref={ref => { this.mySvg = ref; }} />
       </div>
     );
   }
